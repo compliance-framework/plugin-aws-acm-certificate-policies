@@ -1,0 +1,46 @@
+name: Build and Upload Artifacts
+
+on:
+  workflow_call:
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      packages: write
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+      - name: Setup OPA
+        uses: open-policy-agent/setup-opa@v2
+        with:
+          version: 1.6.0
+      - name: Run OPA Build
+        run: |
+          mkdir -p dist/
+          opa build -b policies -o dist/bundle.tar.gz
+      - name: Bundle
+        uses: softprops/action-gh-release@v2
+        with:
+          files: dist/bundle.tar.gz
+      - name: Install gooci cli
+        run: go install github.com/compliance-framework/gooci@v0.0.6
+      - name: Authenticate gooci cli
+        env:
+          GOOCI_ACTOR: ${{ github.actor }}
+          GOOCI_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: gooci login ghcr.io --username "$GOOCI_ACTOR" --password "$GOOCI_TOKEN"
+      - name: gooci Upload Version
+        env:
+          REPO_OWNER: ${{ github.repository_owner }}
+          REPO_NAME: ${{ github.event.repository.name }}
+          REF_NAME: ${{ github.ref_name }}
+        run: gooci upload-single dist/bundle.tar.gz "ghcr.io/$REPO_OWNER/$REPO_NAME:$REF_NAME"
+      - name: gooci Upload Latest
+        if: "!contains(github.ref_name, '-')"
+        env:
+          REPO_OWNER: ${{ github.repository_owner }}
+          REPO_NAME: ${{ github.event.repository.name }}
+        run: gooci upload-single dist/bundle.tar.gz "ghcr.io/$REPO_OWNER/$REPO_NAME:latest"
