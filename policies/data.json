@@ -1,5 +1,6 @@
 {
   "expiry_warning_days": 30,
+  "renewal_warning_days": 90,
   "approved_certificate_statuses": ["ISSUED"],
   "approved_key_algorithms": [
     "RSA_2048",
