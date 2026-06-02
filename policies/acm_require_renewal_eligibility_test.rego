@@ -56,6 +56,18 @@ test_no_violation_imported_cert if {
 		with time.now_ns as 1704067200000000000
 }
 
+# AMAZON_ISSUED, INELIGIBLE, exactly on the 90-day deadline — violation (boundary is inclusive)
+test_violation_ineligible_at_boundary if {
+	count(violation) == 1 with input as {
+		"type": "AMAZON_ISSUED",
+		"status": "ISSUED",
+		"renewal_eligibility": "INELIGIBLE",
+		"not_after": "2024-03-31T00:00:00Z",
+	}
+		with data.renewal_warning_days as 90
+		with time.now_ns as 1704067200000000000
+}
+
 # AMAZON_ISSUED, INELIGIBLE, already expired — no violation (lower bound excludes past certs)
 test_no_violation_ineligible_already_expired if {
 	count(violation) == 0 with input as {
