@@ -15,9 +15,11 @@ violation[{}] if {
 	input.status == "ISSUED"
 	input.renewal_eligibility != "ELIGIBLE"
 	warning_days := data.renewal_warning_days
-	deadline_ns := time.now_ns() + (warning_days * 24 * 60 * 60 * 1000000000)
+	now_ns := time.now_ns()
+	deadline_ns := now_ns + (warning_days * 24 * 60 * 60 * 1000000000)
 	expiry_ns := time.parse_rfc3339_ns(input.not_after)
-	expiry_ns < deadline_ns
+	expiry_ns >= now_ns
+	expiry_ns <= deadline_ns
 }
 
 title := "ACM-issued certificate must be eligible for automatic renewal when nearing expiry"
