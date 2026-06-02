@@ -10,7 +10,8 @@
 package compliance_framework.acm_require_approved_key_algorithm
 
 violation[{}] if {
-	not input.key_algorithm in data.approved_key_algorithms
+	key_alg := object.get(input, "key_algorithm", "")
+	not key_alg in data.approved_key_algorithms
 }
 
 title := "ACM certificate must use an approved key algorithm"

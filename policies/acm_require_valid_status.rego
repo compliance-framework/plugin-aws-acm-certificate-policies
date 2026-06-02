@@ -1,6 +1,6 @@
 # METADATA
 # title: ACM certificate must have an approved status
-# description: Certificates with status EXPIRED, REVOKED, FAILED, or VALIDATION_TIMED_OUT are not providing effective protection.
+# description: Certificates must have a status listed in approved_certificate_statuses. Any status not explicitly approved, including PENDING_VALIDATION and INACTIVE, is a violation.
 # custom:
 #   controls:
 #     - CC6.1
@@ -14,4 +14,4 @@ violation[{}] if {
 }
 
 title := "ACM certificate must have an approved status"
-description := "Certificates with status EXPIRED, REVOKED, FAILED, or VALIDATION_TIMED_OUT are not providing effective protection."
+description := "Certificates must have a status listed in approved_certificate_statuses. Any status not explicitly approved, including PENDING_VALIDATION and INACTIVE, is a violation."

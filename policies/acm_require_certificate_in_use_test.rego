@@ -20,3 +20,7 @@ test_no_violation_pending_cert_not_in_use if {
 		"in_use_by": [],
 	}
 }
+
+test_violation_issued_cert_missing_in_use_by if {
+	count(violation) == 1 with input as {"status": "ISSUED"}
+}

@@ -43,23 +43,23 @@ All configurable thresholds and allowed values are set in `policies/data.json`. 
 
 1. Create `policies/acm_<check_name>.rego` following this structure:
 
-```rego
-# METADATA
-# title: <one-line title>
-# description: <what this checks and why it matters>
-# custom:
-#   controls:
-#     - <SOC2-control-id>
+   ```rego
+   # METADATA
+   # title: <one-line title>
+   # description: <what this checks and why it matters>
+   # custom:
+   #   controls:
+   #     - <SOC2-control-id>
 
-package compliance_framework.acm_<check_name>
+   package compliance_framework.acm_<check_name>
 
-violation[{}] if {
-    # rule body using input.<field> and data.<parameter>
-}
+   violation[{}] if {
+       # rule body using input.<field> and data.<parameter>
+   }
 
-title := "<one-line title>"
-description := "<what this checks and why it matters>"
-```
+   title := "<one-line title>"
+   description := "<what this checks and why it matters>"
+   ```
 
 2. Add configurable thresholds to `policies/data.json` — never hardcode values in policy files.
 

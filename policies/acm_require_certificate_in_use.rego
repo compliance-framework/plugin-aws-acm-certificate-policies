@@ -10,7 +10,8 @@ package compliance_framework.acm_require_certificate_in_use
 
 violation[{}] if {
 	input.status == "ISSUED"
-	count(input.in_use_by) == 0
+	in_use_by := object.get(input, "in_use_by", [])
+	count(in_use_by) == 0
 }
 
 title := "ACM certificate must be attached to an AWS resource"

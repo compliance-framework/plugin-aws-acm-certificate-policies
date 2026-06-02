@@ -10,7 +10,7 @@
 package compliance_framework.acm_require_transparency_logging
 
 violation[{}] if {
-	input.transparency_logging_preference == "DISABLED"
+	input.transparency_logging_preference != "ENABLED"
 }
 
 title := "ACM certificate must have transparency logging enabled"

@@ -16,12 +16,28 @@ test_violation_email_validation if {
 		]
 	}
 		with data.approved_validation_methods as ["DNS"]
+	violation[{"domain_name": "example.com"}] with input as {
+		"domain_validation_options": [
+			{"domain_name": "example.com", "validation_method": "EMAIL"},
+		]
+	}
+		with data.approved_validation_methods as ["DNS"]
 }
 
 test_violation_mixed_methods if {
 	count(violation) == 1 with input as {
 		"domain_validation_options": [
 			{"domain_name": "example.com", "validation_method": "DNS"},
+			{"domain_name": "www.example.com", "validation_method": "EMAIL"},
+		]
+	}
+		with data.approved_validation_methods as ["DNS"]
+}
+
+test_violation_two_failing_domains if {
+	count(violation) == 2 with input as {
+		"domain_validation_options": [
+			{"domain_name": "example.com", "validation_method": "EMAIL"},
 			{"domain_name": "www.example.com", "validation_method": "EMAIL"},
 		]
 	}

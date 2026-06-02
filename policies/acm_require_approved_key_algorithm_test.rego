@@ -19,3 +19,8 @@ test_violation_unknown_algorithm if {
 	count(violation) == 1 with input as {"key_algorithm": "UNKNOWN"}
 		with data.approved_key_algorithms as ["RSA_2048", "RSA_4096", "EC_prime256v1", "EC_secp384r1"]
 }
+
+test_violation_missing_key_algorithm if {
+	count(violation) == 1 with input as {}
+		with data.approved_key_algorithms as ["RSA_2048", "RSA_4096", "EC_prime256v1", "EC_secp384r1"]
+}

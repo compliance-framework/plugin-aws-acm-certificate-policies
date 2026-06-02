@@ -9,7 +9,7 @@
 
 package compliance_framework.acm_require_dns_validation
 
-violation[{}] if {
+violation[{"domain_name": dvo.domain_name}] if {
 	some dvo in input.domain_validation_options
 	not dvo.validation_method in data.approved_validation_methods
 }
