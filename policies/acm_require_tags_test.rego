@@ -36,4 +36,13 @@ test_no_violation_approval_tag_present if {
 		"tags": {"approval": "true", "Environment": "prod", "Owner": "platform-team"}
 	}
 		with data.required_certificate_tags as ["approval", "Environment", "Owner"]
+		with data.required_tag_values as {"approval": "true"}
+}
+
+test_violation_approval_tag_wrong_value if {
+	count(violation) == 1 with input as {
+		"tags": {"approval": "false", "Environment": "prod", "Owner": "platform-team"}
+	}
+		with data.required_certificate_tags as ["approval", "Environment", "Owner"]
+		with data.required_tag_values as {"approval": "true"}
 }

@@ -13,5 +13,8 @@
     "approval",
     "Environment",
     "Owner"
-  ]
+  ],
+  "required_tag_values": {
+    "approval": "true"
+  }
 }
