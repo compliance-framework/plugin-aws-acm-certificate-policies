@@ -10,6 +10,7 @@
   ],
   "approved_validation_methods": ["DNS"],
   "required_certificate_tags": [
+    "approval",
     "Environment",
     "Owner"
   ]
