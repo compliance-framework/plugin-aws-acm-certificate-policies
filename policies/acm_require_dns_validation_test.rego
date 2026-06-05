@@ -16,7 +16,7 @@ test_violation_email_validation if {
 		]
 	}
 		with data.approved_validation_methods as ["DNS"]
-	violation[{"domain_name": "example.com"}] with input as {
+	violation[{"id": "domain_validation_method_not_approved", "domain_name": "example.com"}] with input as {
 		"domain_validation_options": [
 			{"domain_name": "example.com", "validation_method": "EMAIL"},
 		]
