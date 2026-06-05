@@ -19,3 +19,8 @@ test_violation_failed_status if {
 	count(violation) == 1 with input as {"status": "FAILED"}
 		with data.approved_certificate_statuses as ["ISSUED"]
 }
+
+test_violation_id_certificate_status_not_approved if {
+	violation[{"id": "certificate_status_not_approved"}] with input as {"status": "EXPIRED"}
+		with data.approved_certificate_statuses as ["ISSUED"]
+}

@@ -19,3 +19,8 @@ test_no_violation_no_expiry_field if {
 	count(violation) == 0 with input as {}
 		with data.expiry_warning_days as 30
 }
+
+test_violation_id_certificate_expiring_soon if {
+	violation[{"id": "certificate_expiring_soon"}] with input as {"not_after": "2000-01-01T00:00:00Z"}
+		with data.expiry_warning_days as 30
+}

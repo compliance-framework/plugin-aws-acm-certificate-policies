@@ -24,3 +24,7 @@ test_no_violation_pending_cert_not_in_use if {
 test_violation_issued_cert_missing_in_use_by if {
 	count(violation) == 1 with input as {"status": "ISSUED"}
 }
+
+test_violation_id_certificate_not_in_use if {
+	violation[{"id": "certificate_not_in_use"}] with input as {"status": "ISSUED", "in_use_by": []}
+}

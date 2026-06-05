@@ -79,3 +79,13 @@ test_no_violation_ineligible_already_expired if {
 		with data.renewal_warning_days as 90
 		with time.now_ns as 1704067200000000000
 }
+
+test_violation_id_certificate_not_eligible_for_renewal if {
+	violation[{"id": "certificate_not_eligible_for_renewal"}] with input as {
+		"type": "AMAZON_ISSUED",
+		"status": "ISSUED",
+		"renewal_eligibility": "INELIGIBLE",
+		"not_after": "2099-01-01T00:00:00Z",
+	}
+		with data.renewal_warning_days as 999999
+}
