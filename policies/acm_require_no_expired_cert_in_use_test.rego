@@ -38,3 +38,12 @@ test_violation_revoked_multiple_resources if {
 	}
 		with data.approved_certificate_statuses as ["ISSUED"]
 }
+
+test_violation_id_expired_certificate_in_use if {
+	violation[{"id": "expired_certificate_in_use", "resource": "arn:aws:elasticloadbalancing:us-east-1:123:loadbalancer/my-lb"}]
+		with input as {
+			"status": "EXPIRED",
+			"in_use_by": ["arn:aws:elasticloadbalancing:us-east-1:123:loadbalancer/my-lb"],
+		}
+		with data.approved_certificate_statuses as ["ISSUED"]
+}

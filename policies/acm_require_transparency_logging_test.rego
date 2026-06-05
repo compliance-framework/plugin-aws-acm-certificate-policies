@@ -11,3 +11,7 @@ test_violation_logging_disabled if {
 test_violation_empty_preference if {
 	count(violation) == 1 with input as {"transparency_logging_preference": ""}
 }
+
+test_violation_id_transparency_logging_disabled if {
+	violation[{"id": "transparency_logging_disabled"}] with input as {"transparency_logging_preference": "DISABLED"}
+}
