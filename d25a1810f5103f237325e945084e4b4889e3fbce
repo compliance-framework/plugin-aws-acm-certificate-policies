@@ -1,0 +1,2 @@
+lisa-design:
+W2-S4-T02 decisions: fix errors only (user, 2026-10-13); all 30 Regal warnings left as they are. unresolved-reference errors (54) silenced with trailing line-scoped ignores plus a two-line comment under each package, matching plugin-aws-eks-policies#2; no repo .regal/config.yaml so CI keeps the shared config. ci.yml is the mock-plugin-policies-1 caller verbatim (default branch is main). Single PR, two commits (style then ci), 591 changed lines < 1000, so no stack.
