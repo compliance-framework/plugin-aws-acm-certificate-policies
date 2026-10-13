@@ -1,26 +1,29 @@
 package compliance_framework.acm_require_certificate_not_expiring
 
+# data.* keys used here come from policies/data.json, which Regal doesn't read, so their
+# references carry a line-scoped Regal ignore for the unresolved-reference rule.
+
 import future.keywords.if
 
 # Far-future expiry — no violation expected
 test_no_violation_cert_not_expiring if {
 	count(violation) == 0 with input as {"not_after": "2099-01-01T00:00:00Z"}
-		with data.expiry_warning_days as 30
+		with data.expiry_warning_days as 30 # regal ignore:unresolved-reference
 }
 
 # Expiry within warning window — violation expected
 test_violation_cert_expiring_soon if {
 	count(violation) == 1 with input as {"not_after": "2000-01-01T00:00:00Z"}
-		with data.expiry_warning_days as 30
+		with data.expiry_warning_days as 30 # regal ignore:unresolved-reference
 }
 
 # No not_after field — rule body undefined, no violation
 test_no_violation_no_expiry_field if {
 	count(violation) == 0 with input as {}
-		with data.expiry_warning_days as 30
+		with data.expiry_warning_days as 30 # regal ignore:unresolved-reference
 }
 
 test_violation_id_certificate_expiring_soon if {
 	violation[{"id": "certificate_expiring_soon"}] with input as {"not_after": "2000-01-01T00:00:00Z"}
-		with data.expiry_warning_days as 30
+		with data.expiry_warning_days as 30 # regal ignore:unresolved-reference
 }
