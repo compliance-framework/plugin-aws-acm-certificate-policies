@@ -3,3 +3,6 @@ lisa-design:
 - Manifest seeded at 0.1.1 = releases/latest (final, tag commit a4a3dbe is an ancestor of main), so no bootstrap-sha.
 - No version.txt added by hand: release-please (simple) adds it in the first release PR.
 - Bundle stays `opa build --bundle policies`: byte-identical to the old `opa build -b policies` (OPA 1.6.0) output, sha256 4bf2b21b...
+
+lisa-selfreview:
+- Pass 1 (strict): approve, no findings. Checked: every uses: pin is 6e7fc9c # v1.5.2; push triggers are [main] (default branch main); config top-level keys equal workflows release-please/defaults.json at v1.5.2; ci.yml diff is pins only; actionlint v1.7.12 clean; opa 1.14.1 check/test (50/50)/build OK.
