@@ -1,2 +1,5 @@
 lisa-design:
 W2-S4-T02 decisions: fix errors only (user, 2026-10-13); all 30 Regal warnings left as they are. unresolved-reference errors (54) silenced with trailing line-scoped ignores plus a two-line comment under each package, matching plugin-aws-eks-policies#2; no repo .regal/config.yaml so CI keeps the shared config. ci.yml is the mock-plugin-policies-1 caller verbatim (default branch is main). Single PR, two commits (style then ci), 591 changed lines < 1000, so no stack.
+
+lisa-selfreview:
+Pass 1 (ccf-review packs core, rego-policy): approve, no findings on the diff. CI-001 ok (SHA-pinned refs, permissions {} at top, per-job scopes). VERIFY-001 ok (opa fmt/check --strict/test 50/50/build, regal 0 errors, actionlint clean). Behaviour comparison byte-identical. Deferred pre-existing (not in diff): Makefile/README run non-strict opa check and say OPA >= 1.6.0; certificate_not_expiring tests use the real clock (2099 fixture); test files keep future.keywords/rego.v1 imports; detached-metadata warnings.
