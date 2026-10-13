@@ -1,5 +1,8 @@
 package compliance_framework.acm_require_renewal_eligibility
 
+# data.* keys used here come from policies/data.json, which Regal doesn't read, so their
+# references carry a line-scoped Regal ignore for the unresolved-reference rule.
+
 import rego.v1
 
 # Pinned "now": 2024-01-01T00:00:00Z = 1704067200000000000 ns
@@ -16,7 +19,7 @@ test_no_violation_eligible_near_expiry if {
 		"renewal_eligibility": "ELIGIBLE",
 		"not_after": "2024-03-30T00:00:00Z",
 	}
-		with data.renewal_warning_days as 90
+		with data.renewal_warning_days as 90 # regal ignore:unresolved-reference
 		with time.now_ns as 1704067200000000000
 }
 
@@ -28,7 +31,7 @@ test_violation_ineligible_near_expiry if {
 		"renewal_eligibility": "INELIGIBLE",
 		"not_after": "2024-03-30T00:00:00Z",
 	}
-		with data.renewal_warning_days as 90
+		with data.renewal_warning_days as 90 # regal ignore:unresolved-reference
 		with time.now_ns as 1704067200000000000
 }
 
@@ -40,7 +43,7 @@ test_no_violation_ineligible_not_near_expiry if {
 		"renewal_eligibility": "INELIGIBLE",
 		"not_after": "2024-04-01T00:00:00Z",
 	}
-		with data.renewal_warning_days as 90
+		with data.renewal_warning_days as 90 # regal ignore:unresolved-reference
 		with time.now_ns as 1704067200000000000
 }
 
@@ -52,7 +55,7 @@ test_no_violation_imported_cert if {
 		"renewal_eligibility": "",
 		"not_after": "2024-03-30T00:00:00Z",
 	}
-		with data.renewal_warning_days as 90
+		with data.renewal_warning_days as 90 # regal ignore:unresolved-reference
 		with time.now_ns as 1704067200000000000
 }
 
@@ -64,7 +67,7 @@ test_violation_ineligible_at_boundary if {
 		"renewal_eligibility": "INELIGIBLE",
 		"not_after": "2024-03-31T00:00:00Z",
 	}
-		with data.renewal_warning_days as 90
+		with data.renewal_warning_days as 90 # regal ignore:unresolved-reference
 		with time.now_ns as 1704067200000000000
 }
 
@@ -76,7 +79,7 @@ test_no_violation_ineligible_already_expired if {
 		"renewal_eligibility": "INELIGIBLE",
 		"not_after": "2023-12-01T00:00:00Z",
 	}
-		with data.renewal_warning_days as 90
+		with data.renewal_warning_days as 90 # regal ignore:unresolved-reference
 		with time.now_ns as 1704067200000000000
 }
 
@@ -87,5 +90,5 @@ test_violation_id_certificate_not_eligible_for_renewal if {
 		"renewal_eligibility": "INELIGIBLE",
 		"not_after": "2099-01-01T00:00:00Z",
 	}
-		with data.renewal_warning_days as 999999
+		with data.renewal_warning_days as 999999 # regal ignore:unresolved-reference
 }
